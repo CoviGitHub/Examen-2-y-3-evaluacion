@@ -6,7 +6,7 @@ public class SociedadAnonima {
 	LinkedList<TrabajoSA> listaTrabajosSA = new LinkedList<>();
 	private String nomSA;
 
-	public SociedadAnonima(LinkedList<TrabajoSA> listaTrabajosSA, String nomSA) {
+	public SociedadAnonima(String nomSA, LinkedList<TrabajoSA> listaTrabajosSA) {
 		this.listaTrabajosSA.addAll(listaTrabajosSA);
 		this.nomSA = nomSA;
 	}
@@ -21,7 +21,7 @@ public class SociedadAnonima {
 
 	@Override
 	public String toString() {
-		return "SociedadAnonima [listaTrabajosSA=" + listaTrabajosSA + ", nomSA=" + nomSA + "]";
+		return "S.A.: " + nomSA + ", " + listaTrabajosSA;
 	}
 
 }

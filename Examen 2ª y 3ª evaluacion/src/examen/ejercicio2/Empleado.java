@@ -2,21 +2,34 @@ package examen.ejercicio2;
 
 import java.time.LocalDate;
 
-public class Empleado extends CobroEfectivo {
+public class Empleado implements Remunerable, Comparable<Empleado> {
 	private String nombre;
 	private String apellidos;
 	private LocalDate fContrat;
 	private double salario;
-	
-	public Empleado(String nombre, String apellidos, LocalDate fContrat, double salario, int numCuenta) throws Exception {
-		super(numCuenta);
-		salarioException(salario);	
+	private int numCuenta;
+	private double importeIngreso;
+	private LocalDate fIngreso;
+	private boolean ingreso;
+
+	public Empleado(String nombre, String apellidos, LocalDate fContrat, double salario, int numCuenta)
+			throws Exception {
+		salarioException(salario);
+		this.numCuenta = numCuenta;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.fContrat = fContrat;
 		this.salario = salario;
 	}
-	
+
+	@Override
+	public final void ingreso(int numCuenta, double importeIngreso, LocalDate fIngreso) {
+		this.numCuenta = numCuenta;
+		this.importeIngreso = importeIngreso;
+		this.fIngreso = fIngreso;
+		this.ingreso = true;
+	}
+
 	public double getSalario() {
 		return salario;
 	}
@@ -30,7 +43,7 @@ public class Empleado extends CobroEfectivo {
 	}
 
 	public void setNumCuenta(int numCuenta) {
-		CobroEfectivo.numCuenta = numCuenta;
+		this.numCuenta = numCuenta;
 	}
 
 	public String getNombre() {
@@ -44,20 +57,14 @@ public class Empleado extends CobroEfectivo {
 	public LocalDate getfContrat() {
 		return fContrat;
 	}
-	
-	static void salarioException (double salario) throws Exception {
+
+	static void salarioException(double salario) throws Exception {
 		try {
-		if (salario < 0)
-			throw new IllegalArgumentException();
-		}catch (IllegalArgumentException e) {
+			if (salario < 0)
+				throw new IllegalArgumentException();
+		} catch (IllegalArgumentException e) {
 			System.out.print("El salario no puede ser negativo");
 		}
-	}
-
-	@Override
-	public String toString() {
-		return "Empleado: nombre=" + nombre + ", apellidos=" + apellidos + ", fContrat=" + fContrat + ", salario="
-				+ salario + ", NumCuenta=" + getNumCuenta();
 	}
 
 	@Override
@@ -91,6 +98,21 @@ public class Empleado extends CobroEfectivo {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		if (this.ingreso == true) {
+			return "Empleado: " + nombre + " " + apellidos + ", fecha contrato: " + fContrat + ", Salario: " + salario
+					+ ", nº Cuenta: " + numCuenta + ". El ingreso de " + importeIngreso
+					+ " € se realizó el satisfactoriamente" + fIngreso;
+		} else
+			return nombre + " " + apellidos + ", fecha contrato: " + fContrat + ", Salario: " + salario
+					+ ", nº Cuenta: " + numCuenta;
+	}
 
+	@Override
+	public int compareTo(Empleado empleado) {
+		// return nombre.compareTo(empleado.nombre);
+		return 0;
+	}
 
 }

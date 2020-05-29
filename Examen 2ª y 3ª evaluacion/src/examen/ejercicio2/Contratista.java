@@ -1,27 +1,24 @@
 package examen.ejercicio2;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class Contratista extends Empleado {
-	private TipoServicio tipoServ;
-	private HashMap<String, SociedadAnonima> socAnon = new HashMap<>();
+	private ArrayList<SociedadAnonima> socAnon = new ArrayList<>();
 
-	public Contratista(String nombre, String apellidos, TipoServicio tipoServ, LocalDate fContrat, double salario, int numCuenta,
-			Map<String, SociedadAnonima> socAnon) throws Exception {
+	public Contratista(String nombre, String apellidos, LocalDate fContrat, double salario, int numCuenta,
+			ArrayList<SociedadAnonima> socAnon) throws Exception {
 		super(nombre, apellidos, fContrat, salario, numCuenta);
-		this.tipoServ=tipoServ;
-		this.socAnon.putAll(socAnon);
+		this.socAnon.addAll(socAnon);
 	}
 
-	public Map<String, SociedadAnonima> getSocAnon() {
+	public ArrayList<SociedadAnonima> getSocAnon() {
 		return socAnon;
 	}
 
 	@Override
 	public String toString() {
-		return "Contratista: socAnon=" + super.toString() + socAnon + tipoServ;
+		return "Contratista: " + super.toString() + socAnon;
 	}
 
 }

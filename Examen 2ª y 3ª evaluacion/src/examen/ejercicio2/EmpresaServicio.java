@@ -1,16 +1,30 @@
 package examen.ejercicio2;
 
-public class EmpresaServicio extends CobroEfectivo {
+import java.time.LocalDate;
+
+public class EmpresaServicio implements Remunerable {
 	private String nombre;
 	private TipoServicio tipoServ;
 	private double importeMes;
+	private int numCuenta;
+	private double importeIngreso;
+	private LocalDate fIngreso;
+	private boolean ingreso;
 
 	public EmpresaServicio(String nombre, TipoServicio tipoServ, double importeMes, int numCuenta) throws Exception {
-		super(numCuenta);
 		importeException(importeMes);
 		this.nombre = nombre;
 		this.tipoServ = tipoServ;
 		this.importeMes = importeMes;
+		this.numCuenta = numCuenta;
+	}
+
+	@Override
+	public void ingreso(int numCuenta, double importeIngreso, LocalDate fIngreso) {
+		this.numCuenta = numCuenta;
+		this.importeIngreso = importeIngreso;
+		this.fIngreso = fIngreso;
+		this.ingreso = true;
 	}
 
 	static void importeException(double importeMes) throws Exception {
@@ -35,7 +49,7 @@ public class EmpresaServicio extends CobroEfectivo {
 	}
 
 	public void setNumCuenta(int numCuenta) {
-		CobroEfectivo.numCuenta = numCuenta;
+		this.numCuenta = numCuenta;
 	}
 
 	public String getNombre() {
@@ -48,8 +62,13 @@ public class EmpresaServicio extends CobroEfectivo {
 
 	@Override
 	public String toString() {
-		return "EmpresaServicio [nombre=" + nombre + ", tipoServ=" + tipoServ + ", importeMes=" + importeMes
-				+ ", getNumCuenta()=" + getNumCuenta() + "]";
+		if (this.ingreso == true) {
+			return "Empresa de Servicio: " + nombre + ", tipo Servicio " + tipoServ + ", ingreso Mes: " + importeMes
+					+ ", nº Cuenta: " + numCuenta + ". El ingreso de " + importeIngreso
+					+ " € se realizó el satisfactoriamente" + fIngreso;
+		} else
+			return "Empresa de Servicio: " + nombre + ", tipo Servicio: " + tipoServ + ", ingreso Mes: " + importeMes
+					+ ", nº Cuenta: " + numCuenta;
 	}
 
 }

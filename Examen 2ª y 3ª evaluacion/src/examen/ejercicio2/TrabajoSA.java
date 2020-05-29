@@ -13,7 +13,7 @@ public class TrabajoSA {
 
 	@Override
 	public String toString() {
-		return "TrabajoSA [trabajos=" + trabajos + "]";
+		return "Tarea: " + trabajos;
 	}
-	
+
 }
